@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useAccount } from "wagmi";
 import { ExternalLink, ImageIcon, ArrowLeft, ShieldQuestion } from "lucide-react";
@@ -11,9 +11,14 @@ import { AppealForm } from "@/components/AppealForm";
 import { useGetClaim } from "@/hooks/useClaimGuardContract";
 import { formatGEN, formatUnixDateTime, truncateAddress } from "@/lib/utils";
 
-export default function ClaimDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-  const claimId = Number(id);
+// See app/pools/[id]/page.tsx for why this placeholder exists.
+export function generateStaticParams() {
+  return [{ id: "0" }];
+}
+
+export default function ClaimDetailPage() {
+  const pathname = usePathname();
+  const claimId = Number(pathname.split("/").filter(Boolean).pop() ?? "0");
   const { address } = useAccount();
 
   const { data: claim, isLoading } = useGetClaim(claimId);
@@ -75,7 +80,7 @@ export default function ClaimDetailPage({ params }: { params: Promise<{ id: stri
           {(claim.evidence_url || claim.has_photo) && (
             <div className="mt-5 flex flex-wrap gap-3">
               {claim.evidence_url && (
-                <a
+                
                   href={claim.evidence_url}
                   target="_blank"
                   rel="noopener noreferrer"
