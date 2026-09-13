@@ -1,7 +1,6 @@
 "use client";
 
-import { use } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAccount } from "wagmi";
 import { ShieldCheck, Users, Calendar, TrendingUp, PauseCircle, FileText } from "lucide-react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,9 +13,17 @@ import { FileClaimForm } from "@/components/FileClaimForm";
 import { useGetPool, useGetClaimsByPool, useIsCovered } from "@/hooks/useClaimGuardContract";
 import { formatGEN, formatUnixDateTime, truncateAddress } from "@/lib/utils";
 
-export default function PoolDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
-  const poolId = Number(id);
+// Static export needs at least one concrete value to emit a physical
+// HTML file for this route shape. The real id is resolved client-side
+// below from the actual URL — this placeholder file is only ever served
+// as a shell (see public/_redirects) and never shown to users as-is.
+export function generateStaticParams() {
+  return [{ id: "0" }];
+}
+
+export default function PoolDetailPage() {
+  const pathname = usePathname();
+  const poolId = Number(pathname.split("/").filter(Boolean).pop() ?? "0");
   const router = useRouter();
   const { address } = useAccount();
 
