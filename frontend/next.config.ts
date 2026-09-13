@@ -11,6 +11,8 @@ import type { NextConfig } from "next";
 // the standard fix: that code path is never actually executed at runtime.
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "export",
+  trailingSlash: true,
   webpack: (config) => {
     config.externals = [
       ...(Array.isArray(config.externals) ? config.externals : []),
