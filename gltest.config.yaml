@@ -1,0 +1,35 @@
+# GenLayer Testing Suite configuration for ClaimGuard.
+#
+# Default network is Studionet -- GenLayer's hosted, zero-setup network.
+# No Docker or local validators required; just an account with GEN (use
+# the faucet button in the Studio UI's account selector).
+#
+# This file is read by `gltest` (Studio-mode / integration tests). The
+# direct-mode unit tests in test/test_claimguard.py (run via
+# `python3 -m pytest` or `npm test`) don't need it at all -- they run
+# fully in-memory and ignore network config entirely.
+#
+# testnet_asimov / testnet_bradbury are listed for convenience but need
+# ACCOUNT_PRIVATE_KEY_1 set in .env before you point --network at them;
+# see .env.example.
+
+networks:
+  default: studionet
+
+  studionet:
+    url: https://studio.genlayer.com/api
+
+  localnet:
+    url: http://127.0.0.1:4000/api
+
+  testnet_asimov:
+    url: https://rpc-asimov.genlayer.com
+
+  testnet_bradbury:
+    url: https://rpc-bradbury.genlayer.com
+
+paths:
+  contracts: contracts
+  artifacts: artifacts
+
+environment: .env

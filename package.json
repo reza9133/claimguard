@@ -1,0 +1,16 @@
+{
+  "name": "claimguard",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ClaimGuard — AI-adjudicated peer-to-peer mutual coverage pools on GenLayer",
+  "private": true,
+  "scripts": {
+    "deploy:studionet": "node deploy/deployStudionet.mjs",
+    "deploy:cli": "genlayer deploy --contract contracts/claimguard.py --rpc https://studio.genlayer.com/api",
+    "test": "python3 -m pytest test/test_claimguard.py -v",
+    "check": "genvm-lint check contracts/claimguard.py && python3 -m pytest test/test_claimguard.py -q"
+  },
+  "dependencies": {
+    "genlayer-js": "^1.1.8"
+  }
+}
