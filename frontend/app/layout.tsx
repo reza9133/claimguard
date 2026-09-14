@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@rainbow-me/rainbowkit/styles.css";
 import "./globals.css";
 import { Providers, WrongNetworkBanner } from "./providers";
 import { Navbar } from "@/components/Navbar";
