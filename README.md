@@ -250,7 +250,7 @@ is still the safer default, and it costs nothing to get right.
 ### Prerequisites
 
 - Python 3.12+
-- Node.js 18+
+- Node.js 20.9+ (Next.js 16 dropped support for Node 18)
 - A GenLayer Studionet account with GEN — open
   [studio.genlayer.com](https://studio.genlayer.com), select/create an account, and use
   the 💧 faucet button in the account selector.
